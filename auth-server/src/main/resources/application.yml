@@ -1,0 +1,7 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /auth-server
+spring:
+  profiles:
+    active: dev
