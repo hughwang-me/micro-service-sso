@@ -1,0 +1,4 @@
+server:
+  port: 8013
+#  servlet:
+#    context-path: /predicatePath
