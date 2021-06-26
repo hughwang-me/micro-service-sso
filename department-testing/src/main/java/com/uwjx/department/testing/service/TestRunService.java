@@ -25,20 +25,25 @@ public class TestRunService {
     HughMenuMapper mapper;
 
     @PostConstruct
-    public void run(){
+    public void run() {
         Gson gson = new Gson();
         List<HughMenu> menus = mapper.list();
         for (HughMenu menu : menus) {
-            log.warn("menu : {}" , gson.toJson(menu));
+            log.warn("menu : {}", gson.toJson(menu));
         }
 
-        List<Map<String , Object>> mapList = mapper.listMap();
+        List<Map<String, Object>> mapList = mapper.listMap();
         for (Map<String, Object> objectMap : mapList) {
-            log.warn("menu : {}" , gson.toJson(objectMap));
+            log.warn("menu : {}", gson.toJson(objectMap));
         }
 
         MapTree mapTree = new MapTree(mapList);
         List<Map<String, Object>> listMap = mapTree.toJsonMap("level");
-        log.warn("结果:{}" , gson.toJson(listMap));
+        log.warn("结果:{}", gson.toJson(listMap));
+    }
+
+    public static void main(String[] args) {
+        int a = (int)Double.parseDouble("12.9");
+        log.warn("a ->{}", a);
     }
 }

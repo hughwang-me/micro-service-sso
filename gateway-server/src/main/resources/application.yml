@@ -1,14 +1,14 @@
 server:
   port: 8010
-spring:
-  cloud:
-    gateway:
-      routes:
-      -  id: a_route
-         uri: http://localhost:8011/predicate-time/time
-         predicates:
-           - Before=2027-01-20T17:42:47.789-07:00[America/Denver]
-      -  id: b_route
-         uri: http://www.baidu.com
-         predicates:
-           - Path=/book/list
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#      -  id: a_route
+#         uri: http://localhost:8011/predicate-time/time
+#         predicates:
+#           - Before=2027-01-20T17:42:47.789-07:00[America/Denver]
+#      -  id: b_route
+#         uri: http://www.baidu.com
+#         predicates:
+#           - Path=/book/list
