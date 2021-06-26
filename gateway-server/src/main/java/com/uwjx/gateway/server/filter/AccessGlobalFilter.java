@@ -45,12 +45,14 @@ public class AccessGlobalFilter implements GlobalFilter , Order {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        log.warn("进入 AccessGlobalFilter");
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getPath().pathWithinApplication().value();
         HttpMethod method = request.getMethod();
         StringBuilder builder = new StringBuilder();
         URI targetUri = exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR);
         if (HttpMethod.GET.equals(method)) {
+            log.warn("进入 AccessGlobalFilter GET");
             MultiValueMap<String, String> queryParams = request.getQueryParams();
             try {
                 builder.append(mapper.writeValueAsString(queryParams));
@@ -58,6 +60,7 @@ public class AccessGlobalFilter implements GlobalFilter , Order {
                 log.error(e.getMessage(), e);
             }
         } else if (HttpMethod.POST.equals(method)) {
+            log.warn("进入 AccessGlobalFilter POST");
             Flux<DataBuffer> body = request.getBody();
             ServerHttpRequest serverHttpRequest = request.mutate().uri(request.getURI()).build();
             body.subscribe(dataBuffer -> {
@@ -66,8 +69,17 @@ public class AccessGlobalFilter implements GlobalFilter , Order {
                     builder.append(StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8));
                 } catch (IOException e) {
                     log.error(e.getMessage(), e);
+                }finally {
+                    try {
+                        if(inputStream != null){
+                            inputStream.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
+            log.warn("获取到的请求体:{}" , builder);
             // 重写请求体,因为请求体数据只能被消费一次
             request = new ServerHttpRequestDecorator(serverHttpRequest) {
                 @Override
