@@ -29,8 +29,8 @@ public class GatewayConfiguration {
 //                        14,56,59,0, ZoneId.systemDefault()))
 ////                .uri("http://localhost:8012/predicate-cookie/time"));
 //                        .uri("http://localhost:8011/predicate-time/time"));
-        builder.route("b-router" ,f->f.path("/predicate-time/**")
-                .uri("http://localhost:8011"));
+        builder.route("b-router" ,f->f.path("/predicatePath/**")
+                .uri("http://localhost:8013"));
 //        builder.route("c-router" , f->f.after(
 //                ZonedDateTime.of(2021,6,26,
 //                        14,56,59,0, ZoneId.systemDefault()))

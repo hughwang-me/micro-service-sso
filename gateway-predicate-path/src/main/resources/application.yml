@@ -1,4 +1,4 @@
 server:
   port: 8013
-#  servlet:
-#    context-path: /predicatePath
+  servlet:
+    context-path: /predicatePath
